@@ -1,0 +1,34 @@
+Retrieval Augmented Generation (RAG)
+
+RAG is a technique that enhances language models by retrieving relevant information from external knowledge sources before generating responses.
+
+How RAG Works:
+1. Query Processing: User question is converted to a vector embedding
+2. Retrieval: Most relevant document chunks are retrieved from vector database
+3. Context Formation: Retrieved chunks are formatted as context
+4. Generation: LLM generates answer based on the context and question
+5. Citation: Sources are tracked and returned with the answer
+
+Benefits of RAG:
+- Provides up-to-date information beyond the LLM's training data
+- Reduces hallucinations by grounding responses in factual documents
+- Enables domain-specific knowledge without fine-tuning
+- Allows for source attribution and fact-checking
+- More cost-effective than fine-tuning for many use cases
+
+Key Design Decisions:
+- Chunk size: Balance between context and specificity (typically 500-2000 characters)
+- Chunk overlap: Ensures continuity across splits (typically 10-20% of chunk size)
+- Number of retrieved chunks: Usually 3-5 for optimal context
+- Embedding model: Trade-off between quality and speed
+- Retrieval strategy: Similarity search, MMR, or hybrid approaches
+
+Best Practices:
+1. Clean and preprocess documents before indexing
+2. Use appropriate chunk sizes for your content type
+3. Implement metadata filtering for better retrieval
+4. Monitor and evaluate retrieval quality
+5. Use reranking for improved precision
+6. Implement source citation in responses
+
+RAG systems are becoming the standard approach for building LLM applications that need to work with private or domain-specific data.
