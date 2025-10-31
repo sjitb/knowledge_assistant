@@ -1,0 +1,40 @@
+# Configuration for Knowledge Assistant
+
+# Document processing settings
+document_loader:
+  input_directory: "./documents"
+  supported_extensions:
+    - .txt
+    - .pdf
+    - .docx
+    - .md
+
+# Text splitting settings
+text_splitter:
+  chunk_size: 1000
+  chunk_overlap: 200
+
+# Embeddings settings
+embeddings:
+  model: "sentence-transformers/all-MiniLM-L6-v2"
+  # For OpenAI embeddings (requires API key):
+  # provider: "openai"
+  # model: "text-embedding-ada-002"
+
+# Vector store settings
+vector_store:
+  type: "chroma"
+  persist_directory: "./chroma_db"
+  collection_name: "knowledge_base"
+
+# LLM settings
+llm:
+  provider: "openai"
+  model: "gpt-3.5-turbo"
+  temperature: 0.7
+  max_tokens: 500
+
+# Query settings
+query:
+  top_k: 4
+  score_threshold: 0.5

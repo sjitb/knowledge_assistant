@@ -1,0 +1,29 @@
+Vector Embeddings and Semantic Search
+
+Vector embeddings are numerical representations of text that capture semantic meaning. They transform text into high-dimensional vectors where similar meanings result in similar vectors.
+
+How Embeddings Work:
+- Text is processed through a neural network model
+- The model outputs a fixed-size vector (typically 384, 768, or 1536 dimensions)
+- Similar texts have vectors that are close together in vector space
+- Distance metrics (cosine similarity, Euclidean distance) measure similarity
+
+Popular Embedding Models:
+1. OpenAI text-embedding-ada-002: High quality, 1536 dimensions
+2. Sentence-BERT: Open source, efficient, 384-768 dimensions
+3. all-MiniLM-L6-v2: Lightweight, fast, 384 dimensions
+
+Vector Databases:
+- Chroma: Open source, lightweight, easy to use
+- Pinecone: Cloud-based, scalable
+- Weaviate: Open source with GraphQL API
+- FAISS: Facebook's similarity search library
+
+Applications:
+- Semantic search over large document collections
+- Recommendation systems
+- Duplicate detection
+- Document clustering
+- Question answering systems
+
+The quality of embeddings directly impacts the performance of semantic search and retrieval systems.
