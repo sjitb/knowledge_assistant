@@ -1,11 +1,9 @@
 """Query engine module for processing natural language queries and generating answers."""
 
 from typing import List, Dict, Any, Optional, Tuple
-from langchain.schema import Document
+from langchain_core.documents import Document
+from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
-from langchain.chains import RetrievalQA
-from langchain.prompts import PromptTemplate
-from langchain.chains.qa_with_sources import load_qa_with_sources_chain
 
 
 class QueryEngine:
@@ -106,41 +104,18 @@ Answer with source citations:"""
             'num_sources': len(sources)
         }
     
-    def query_with_retrieval_qa(self, question: str) -> Dict[str, Any]:
-        """Alternative query method using RetrievalQA chain.
+    def query_with_context(self, question: str, score_threshold: Optional[float] = None) -> Dict[str, Any]:
+        """Query with simplified context-based approach (no chains dependency).
         
         Args:
             question: Natural language question
+            score_threshold: Minimum relevance score
             
         Returns:
             Dictionary containing answer and metadata
         """
-        retriever = self.vector_store_manager.as_retriever(k=self.top_k)
-        
-        qa_chain = RetrievalQA.from_chain_type(
-            llm=self.llm,
-            chain_type="stuff",
-            retriever=retriever,
-            return_source_documents=True,
-            chain_type_kwargs={"prompt": self.PROMPT}
-        )
-        
-        result = qa_chain({"query": question})
-        
-        # Extract source information
-        sources = []
-        for doc in result.get('source_documents', []):
-            sources.append({
-                'file_name': doc.metadata.get('file_name', 'Unknown'),
-                'source': doc.metadata.get('source', 'Unknown'),
-                'content_preview': doc.page_content[:200] + "..." if len(doc.page_content) > 200 else doc.page_content
-            })
-        
-        return {
-            'answer': result['result'],
-            'sources': sources,
-            'num_sources': len(sources)
-        }
+        # This is an alias for the main query method for backward compatibility
+        return self.query(question, score_threshold)
     
     def _format_context(self, documents: List[Document], scores: List[float]) -> str:
         """Format documents into context string with relevance scores.

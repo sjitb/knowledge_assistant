@@ -23,24 +23,63 @@ A LangChain-based agentic application for managing and querying a personal knowl
 
 ## Installation
 
+### Option 1: Poetry (Recommended)
+
+[Poetry](https://python-poetry.org/) is the recommended package manager for this project.
+
+1. **Install Poetry**:
+```bash
+curl -sSL https://install.python-poetry.org | python3 -
+```
+
+2. **Clone the repository**:
+```bash
+git clone https://github.com/sjitb/knowledge_assistant.git
+cd knowledge_assistant
+```
+
+3. **Install dependencies**:
+```bash
+poetry install
+```
+
+4. **Set up environment variables**:
+```bash
+cp .env.example .env
+# Edit .env and add your OpenAI API key
+```
+
+See [INSTALL_POETRY.md](INSTALL_POETRY.md) for detailed Poetry installation and usage instructions.
+
+### Option 2: pip
+
 1. **Clone the repository**:
 ```bash
 git clone https://github.com/sjitb/knowledge_assistant.git
 cd knowledge_assistant
 ```
 
-2. **Install dependencies**:
+2. **Create virtual environment** (recommended):
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+3. **Install dependencies**:
 ```bash
 pip install -r requirements.txt
 ```
 
-3. **Set up environment variables**:
+4. **Set up environment variables**:
 ```bash
 cp .env.example .env
 # Edit .env and add your OpenAI API key
 ```
 
-4. **Configure settings** (optional):
+See [SETUP.md](SETUP.md) for detailed pip installation instructions.
+
+### Configuration (Optional)
+
 Edit `config.yaml` to customize:
 - Document directory
 - Chunk size and overlap
@@ -54,6 +93,14 @@ Edit `config.yaml` to customize:
 
 Place your documents in the `documents/` directory (or configure a custom path in `config.yaml`), then run:
 
+**With Poetry:**
+```bash
+poetry run python main.py index
+# Or use the Makefile
+make index
+```
+
+**With pip:**
 ```bash
 python main.py index
 ```
@@ -66,18 +113,42 @@ This will:
 
 ### 2. Query Your Knowledge Base
 
-**Interactive mode**:
+**Interactive mode:**
+
+With Poetry:
+```bash
+poetry run python main.py query
+# Or
+make query
+```
+
+With pip:
 ```bash
 python main.py query
 ```
 
-**Single question**:
+**Single question:**
+
+With Poetry:
+```bash
+poetry run python main.py ask "What is LangChain?"
+# Or
+make ask q="What is LangChain?"
+```
+
+With pip:
 ```bash
 python main.py ask "What is LangChain?"
 ```
 
 ### 3. Add New Documents
 
+**With Poetry:**
+```bash
+poetry run python main.py add /path/to/new/documents
+```
+
+**With pip:**
 ```bash
 python main.py add /path/to/new/documents
 ```
@@ -85,6 +156,20 @@ python main.py add /path/to/new/documents
 ## Usage Examples
 
 ### Indexing Documents
+
+**With Poetry:**
+```bash
+# Index documents from default directory
+poetry run python main.py index
+
+# Use custom config
+poetry run python main.py --config custom_config.yaml index
+
+# Or use Makefile
+make index
+```
+
+**With pip:**
 ```bash
 # Index documents from default directory
 python main.py index

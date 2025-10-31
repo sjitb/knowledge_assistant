@@ -9,7 +9,7 @@ from langchain_community.document_loaders import (
     Docx2txtLoader,
     DirectoryLoader,
 )
-from langchain.schema import Document
+from langchain_core.documents import Document
 
 
 class DocumentLoader:
